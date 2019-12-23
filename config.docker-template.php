@@ -82,6 +82,10 @@ $CFG->behat_profiles = array(
 $CFG->behat_faildump_path = '/var/www/behatfaildumps';
 $CFG->behat_increasetimeout = getenv('MOODLE_DOCKER_TIMEOUT_FACTOR');
 
+if (!empty(getenv('MOODLE_DOCKER_BEHAT_IONIC_WWWROOT'))) {
+    $CFG->behat_ionic_wwwroot = getenv('MOODLE_DOCKER_BEHAT_IONIC_WWWROOT');
+}
+
 define('PHPUNIT_LONGTEST', true);
 
 if (getenv('MOODLE_DOCKER_APP')) {

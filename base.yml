@@ -6,6 +6,7 @@ services:
     volumes:
       - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/apache2_faildumps.conf"
+      - "${ASSETDIR}/web/apache2_app.conf:/etc/apache2/conf-enabled/apache2_app.conf"
     environment:
       MOODLE_DOCKER_RUNNING: 1
       MOODLE_DOCKER_DBNAME: moodle
@@ -14,6 +15,7 @@ services:
       MOODLE_DOCKER_BROWSER: firefox
       MOODLE_DOCKER_WEB_HOST: "${MOODLE_DOCKER_WEB_HOST}"
       MOODLE_DOCKER_TIMEOUT_FACTOR: "${MOODLE_DOCKER_TIMEOUT_FACTOR}"
+      MOODLE_DOCKER_BEHAT_IONIC_WWWROOT: "${MOODLE_DOCKER_BEHAT_IONIC_WWWROOT}"
   exttests:
     image: moodlehq/moodle-exttests
     volumes:
