@@ -30,7 +30,6 @@ else
   dockercompose="docker-compose"
 fi
 dockercompose="${dockercompose} -f ${basedir}/base.yml"
-dockercompose="${dockercompose} -f ${basedir}/service.mail.yml"
 
 # PHP Version.
 export MOODLE_DOCKER_PHP_VERSION=${MOODLE_DOCKER_PHP_VERSION:-8.2}

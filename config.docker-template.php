@@ -65,10 +65,10 @@ $CFG->passwordpolicy = 0;
 $CFG->cronclionly = 0;
 $CFG->pathtophp = '/usr/local/bin/php';
 
-$CFG->phpunit_dataroot  = '/var/www/phpunitdata';
-$CFG->phpunit_prefix = 't_';
-define('TEST_EXTERNAL_FILES_HTTP_URL', 'http://exttests:9000');
-define('TEST_EXTERNAL_FILES_HTTPS_URL', 'http://exttests:9000');
+$selenium_host = getenv('MOODLE_DOCKER_SELENIUM_ADDRESS');
+if (empty($selenium_host)) {
+    $selenium_host = 'http://selenium:4444/wd/hub';
+}
 
 $CFG->behat_wwwroot   = 'http://webserver';
 $CFG->behat_dataroot  = '/var/www/behatdata';
@@ -76,13 +76,15 @@ $CFG->behat_prefix = 'b_';
 $CFG->behat_profiles = array(
     'default' => array(
         'browser' => getenv('MOODLE_DOCKER_BROWSER'),
-        'wd_host' => 'http://selenium:4444/wd/hub',
+        'wd_host' => $selenium_host,
     ),
 );
 $CFG->behat_faildump_path = '/var/www/behatfaildumps';
 $CFG->behat_increasetimeout = getenv('MOODLE_DOCKER_TIMEOUT_FACTOR');
 
-define('PHPUNIT_LONGTEST', true);
+if (!empty(getenv('MOODLE_DOCKER_BEHAT_IONIC_WWWROOT'))) {
+    $CFG->behat_ionic_wwwroot = getenv('MOODLE_DOCKER_BEHAT_IONIC_WWWROOT');
+}
 
 if (getenv('MOODLE_DOCKER_APP')) {
     $appport = getenv('MOODLE_DOCKER_APP_PORT') ?: 8100;
