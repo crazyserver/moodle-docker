@@ -107,6 +107,11 @@ IF "%MOODLE_DOCKER_BROWSER_TAG%"=="" (
         SET MOODLE_DOCKER_BROWSER_TAG=4
 )
 
+IF "%MOODLE_DOCKER_SELENIUM_REPOSITORY%"=="" (
+    REM Default to official selenium images by default.
+    SET MOODLE_DOCKER_SELENIUM_REPOSITORY=selenium
+)
+
 IF "%MOODLE_DOCKER_BROWSER_NAME%"=="chrome" (
     IF NOT "%MOODLE_DOCKER_APP_PATH%"=="" (
         SET DOCKERCOMPOSE=%DOCKERCOMPOSE% -f "%BASEDIR%\moodle-app-dev.yml"
